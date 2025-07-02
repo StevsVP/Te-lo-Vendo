@@ -761,7 +761,7 @@ body {
     }
 }
 
-/* ===== NUEVOS ESTILOS PARA LA PÁGINA "ACERCA DE NOSOTROS" ===== */
+/* ===== ESTILOS PARA LA PÁGINA "ACERCA DE NOSOTROS" ===== */
 
 /* Estilos específicos para la sección "Acerca de Nosotros" */
 .about-us-section {
@@ -779,10 +779,9 @@ body {
 
 /* Contenedor de la imagen: aquí ajustamos el tamaño para que el texto la rodee */
 .about-us__image-container {
-    /* Ajustado para que la imagen ocupe menos espacio y el texto la rodee */
     flex: 0 0 auto; /* No crecer, no encoger, tamaño automático */
-    width: 55%; /* La imagen ocupa el 45% del ancho del contenedor padre */
-    max-width: 400px; /* Tamaño máximo para la imagen (aproximadamente la mitad de un 600px original) */
+    width: 55%; /* La imagen ocupa el 55% del ancho del contenedor padre en pantallas grandes */
+    max-width: 400px; /* Tamaño máximo para la imagen */
     float: left; /* Flota la imagen a la izquierda para que el texto la envuelva */
     margin-right: 30px; /* Espacio a la derecha de la imagen para el texto */
     margin-bottom: 20px; /* Espacio inferior por si el texto es más corto */
@@ -810,19 +809,17 @@ body {
 .about-us__story-text {
     flex: 1; /* Permite que este div ocupe el espacio restante */
     min-width: 350px; /* Asegura que el texto tenga un ancho mínimo razonable */
-    /* Aquí no se usa float, ya que el texto fluye automáticamente alrededor de la imagen flotante */
 }
 
 /* Agrandar el tamaño de las letras en los párrafos de la sección de historia */
 .about-us-section p.about-us__text-enlarged {
-    font-size: 1.15em; /* Aumenta el tamaño del texto. Puedes ajustar este valor (ej: 1.1em, 1.2em) */
+    font-size: 1.15em; /* Aumenta el tamaño del texto. Puedes ajustar este valor */
     line-height: 1.6; /* Mejora la legibilidad con mayor espacio entre líneas */
     margin-bottom: 15px; /* Espacio entre párrafos */
     text-align: justify; /* Justifica el texto para una apariencia más limpia */
 }
 
-
-/* Sección de Valores (ya existente, pero aseguro que esté en orden) */
+/* Sección de Valores */
 .values-section {
     margin-top: 3rem; /* Espacio para separar de la sección anterior */
     margin-bottom: 3rem; /* Espacio para separar de la sección siguiente */
@@ -854,16 +851,73 @@ body {
     padding: 3rem 0; /* Ajusta el padding si es necesario */
 }
 
+/* --- Estilos y Micro-interacciones para las tarjetas del equipo (CONSOLIDADOS) --- */
 .team-member-card {
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     padding: 1.5rem;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para efectos de hover */
+    overflow: hidden; /* Asegura que cualquier efecto de borde o sombra se vea bien */
 }
 
+/* Efecto al pasar el cursor sobre la tarjeta del miembro del equipo */
 .team-member-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8 
+    transform: translateY(-5px); /* Eleva la tarjeta ligeramente */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Estilos de la imagen del equipo (¡CRUCIAL para evitar estiramiento!) */
+.team-member-card__image {
+    width: 150px; /* Tamaño fijo para las fotos del equipo */
+    height: 150px;
+    border-radius: 50%; /* Forma circular */
+    object-fit: cover; /* ¡Esta es la clave para evitar el estiramiento y recortar la imagen si es necesario! */
+    margin: 0 auto 1rem; /* Centrar y espaciar */
+    border: 3px solid var(--highlight-color); /* Borde para destacar */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease; /* Transición para el zoom */
+}
+
+/* Opcional: efecto sutil en la imagen al pasar el cursor */
+.team-member-card:hover .team-member-card__image {
+    transform: scale(1.05); /* Un ligero "zoom" en la imagen */
+}
+
+/* Opcional: estilo al texto del nombre o rol al pasar el cursor */
+.team-member-card h3,
+.team-member-card p.role {
+    transition: color 0.3s ease;
+}
+
+.team-member-card:hover h3,
+.team-member-card:hover p.role {
+    color: var(--primary-color); /* Cambia el color a tu color primario definido */
+}
+
+/* Media Queries para responsividad (ajustamos para el nuevo tamaño de imagen en about-us) */
+@media (max-width: 768px) {
+    .about-us__story-visual {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-us__image-container {
+        float: none; /* Deshacemos el float para que se centre */
+        width: 90%; /* La imagen ocupa más ancho en pantallas pequeñas */
+        max-width: 500px; /* Aumentamos el máximo en móviles también */
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+
+    .about-us__story-text {
+        min-width: unset; /* Quita el min-width para que se ajuste */
+        width: 100%;
+    }
+
+    /* Ajuste para que las tarjetas del equipo se apilen bien en móviles */
+    .grid--2cols {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
 }
