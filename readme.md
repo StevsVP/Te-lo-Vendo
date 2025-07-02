@@ -8,4 +8,4 @@ telovendo/
 │   ├── styles.css      # Estilos principales
 ├── js/
 │   └── main.js         # JavaScript principal
-└── img/                # Imágenes del sitio
+└── img/                # Imágenes del sitio# Te-lo-Vendo
